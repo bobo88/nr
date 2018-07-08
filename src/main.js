@@ -16,6 +16,11 @@ import constant from './constant'
 
 import cookie from './core/cookie'
 import GLOBAL from './core/global'
+// mavon-editor编辑器
+// import mavonEditor from 'mavon-editor'
+// import 'mavon-editor/dist/css/index.css'
+// // use
+// Vue.use(mavonEditor)
 import uploadImageOption from './core/upload-image'
 // element-ui组件样式
 import ElementUI from 'element-ui'

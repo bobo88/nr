@@ -4,8 +4,8 @@
 
     <!-- // // 首页 - 配置logo
     // import LogoConfig from '../pages/index/child/LogoConfig.vue'
-    // // 首页 - 导航条
-    // import NavConfig from '../pages/index/child/NavConfig.vue'
+    // // 首页 - 其他素材图片
+    // import OtherPic from '../pages/index/child/OtherPic.vue'
     // // 首页 - 首页轮播图
     // import BannerConfig from '../pages/index/child/BannerConfig.vue'
     // // 首页 - 热销车型
@@ -19,12 +19,12 @@
 
 
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="配置logo" name="first">
+      <el-tab-pane label="其他素材图片" name="first">
+        <other-pic></other-pic>
+      </el-tab-pane>
+      <el-tab-pane label="配置logo" name="second">
         <logo-config></logo-config>
       </el-tab-pane>
-      <!-- <el-tab-pane label="导航条" name="second">
-        <nav-config></nav-config>
-      </el-tab-pane> -->
       <el-tab-pane label="首页轮播图" name="third">
         <banner-config></banner-config>
       </el-tab-pane>
@@ -47,8 +47,8 @@
 <script>
 // 首页 - 配置logo
 import LogoConfig from '@/pages/index/child/LogoConfig.vue'
-// 首页 - 导航条
-import NavConfig from '@/pages/index/child/NavConfig.vue'
+// 首页 - 其他素材图片
+import OtherPic from '@/pages/index/child/OtherPic.vue'
 // 首页 - 首页轮播图
 import BannerConfig from '@/pages/index/child/BannerConfig.vue'
 // 首页 - 热销车型
@@ -63,7 +63,7 @@ export default {
   name: 'index-page',
   components: {
     LogoConfig,
-    NavConfig,
+    OtherPic,
     BannerConfig,
     HotSale,
     CustomersConfig,

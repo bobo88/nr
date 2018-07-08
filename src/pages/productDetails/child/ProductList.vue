@@ -56,22 +56,36 @@
         align="center">
       </el-table-column>
 
-      <el-table-column
-        prop="seoname"
-        label="SEO描述"
-        align="center">
+      <el-table-column label="SEO描述" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.seoname }}
+        </template>
       </el-table-column>
 
-      <el-table-column
-        prop="descinfo"
-        label="产品描述"
-        align="center">
+      <el-table-column label="产品描述" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.descinfo }}
+        </template>
       </el-table-column>
-
-      <el-table-column
-        prop="keyword"
-        label="关键词"
-        align="center">
+      <el-table-column label="关键词" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.keyword }}
+        </template>
+      </el-table-column>
+      <el-table-column label="详情" align="center" width="120">
+        <template slot-scope="scope">
+          <div class="w100 ellipsis lh34">{{ scope.row.detail }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="技术参数" align="center" width="120">
+        <template slot-scope="scope">
+          <div class="w100 ellipsis lh34">{{ scope.row.technical }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="售后" align="center" width="120">
+        <template slot-scope="scope">
+          <div class="w100 ellipsis lh34">{{ scope.row.sale }}</div>
+        </template>
       </el-table-column>
 
       <el-table-column
