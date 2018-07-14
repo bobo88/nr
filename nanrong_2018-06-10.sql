@@ -59,7 +59,12 @@ saveimg.php
 
 
 
-
+CREATE TABLE `ims_scene` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT '' COMMENT '场景',
+  `weight` int(9) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 
 
@@ -127,14 +132,33 @@ DROP TABLE IF EXISTS `ims_news`;
 
 CREATE TABLE `ims_news` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `img` -----------图片
+  `img` varchar(500) DEFAULT '' COMMENT '图片',
   `title` varchar(100) NOT NULL COMMENT '资讯标题',
-  `desc` varchar(200) NOT NULL COMMENT '新闻简讯简介',
+  `descinfo` varchar(200) NOT NULL COMMENT '新闻简讯简介',
   `content` text NOT NULL COMMENT '内容详情',
   `url` varchar(200) NOT NULL COMMENT '外部链接地址',
   `newsdata` int(10) NOT NULL COMMENT '资讯时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态，0正常，-1禁用',
   `createtime` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='新闻资讯表';
+
+CREATE TABLE `ims_news` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `descinfo` text NOT NULL COMMENT '新闻简讯简介',
+
+  `type` tinyint(2) DEFAULT '1' COMMENT '新闻类别1，新闻资讯，2是企业动态，3是轮播图片，4是好消息列表',
+  `source` varchar(200) DEFAULT '' COMMENT '来源',
+  `num` int(9) DEFAULT '0' COMMENT '阅读量',
+  `weight` int(11) DEFAULT '0' COMMENT '权重值',
+  
+  `title` varchar(100) NOT NULL COMMENT '资讯标题',
+  `content` text NOT NULL COMMENT '内容详情',
+  `img` varchar(500) DEFAULT '' COMMENT '图片',
+  `url` varchar(200) NOT NULL COMMENT '外部链接地址',
+  `newsdata` int(10) NOT NULL COMMENT '资讯时间',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态，0正常，-1禁用',
+  `create_time` varchar(20) DEFAULT '' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='新闻资讯表';
 

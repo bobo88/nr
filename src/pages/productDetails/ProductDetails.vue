@@ -6,8 +6,11 @@
       <el-tab-pane label="产品列表" name="first">
         <product-list></product-list>
       </el-tab-pane>
-      <el-tab-pane label="添加所属分类" name="second">
+      <el-tab-pane label="管理所属分类" name="second">
         <add-sort></add-sort>
+      </el-tab-pane>
+      <el-tab-pane label="管理适用场景" name="three">
+        <add-scene></add-scene>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -16,11 +19,13 @@
 <script>
   import ProductList from '@/pages/productDetails/child/ProductList.vue'
   import AddSort from '@/pages/productDetails/child/AddSort.vue'
+  import AddScene from '@/pages/productDetails/child/AddScene.vue'
   export default {
     name: 'product-details',
     components: {
       ProductList,
-      AddSort
+      AddSort,
+      AddScene
     },
     data () {
       return {

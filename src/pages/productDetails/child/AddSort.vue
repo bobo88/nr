@@ -1,5 +1,5 @@
 <template>
-  <div class="product-list">
+  <div class="add-sort">
     <div class="mb10">
       <el-button type="success" size="small" @click="addOprate">添加所属分类</el-button>
     </div>
@@ -15,12 +15,13 @@
 
       <el-table-column label="适合场景" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.scene === '1'">公园</span>
+          <span>{{ scope.row._sceneName }}</span>
+          <!-- <span v-if="scope.row.scene === '1'">公园</span>
           <span v-else-if="scope.row.scene === '2'">旅游景点</span>
           <span v-else-if="scope.row.scene === '3'">小区</span>
           <span v-else-if="scope.row.scene === '4'">购物商场</span>
           <span v-else-if="scope.row.scene === '5'">游乐场所</span>
-          <span v-else>室外观光</span>
+          <span v-else>室外观光</span> -->
         </template>
       </el-table-column>
 
@@ -46,13 +47,8 @@
         </div>
         <div class="mb10">
           <span class="inline-block w100">适合场景：</span>
-          <el-select size="small" class="w200" v-model="tcObj.scene" placeholder="请选择">
-            <el-option key="1" label="公园" value="1"></el-option>
-            <el-option key="2" label="旅游景点" value="2"></el-option>
-            <el-option key="3" label="小区" value="3"></el-option>
-            <el-option key="4" label="购物商场" value="4"></el-option>
-            <el-option key="5" label="游乐场所" value="5"></el-option>
-            <el-option key="6" label="室外观光" value="6"></el-option>
+          <el-select multiple size="small" class="w200" v-model="tcObj.scene" placeholder="请选择">
+            <el-option v-for="(item, index) in sceneListData" :key="index" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </div>
         <div class="mb10">
@@ -70,20 +66,42 @@
 
 <script>
   export default {
-    name: 'product-list',
+    name: 'add-sort',
     data () {
       return {
         sortListData: [],
+        sceneListData: [],
         tnameList: [],
         centerDialogVisible: false,
         tcObj: {}
       }
     },
     created () {
-      // 页面一进来，加载所属分类数据
-      this.getSortList();
+      // 页面一进来，加载数据
+      this.getSceneList();
     },
     methods: {
+      getSceneList () {
+        let options = {
+          action: 'find'
+        };
+        this.Api.scene(options)
+        .then(res => {
+          return this.Api.checkResponse(res)
+        })
+        .then(data => {
+          if (data.err === 0) {
+            let _data = data.data;
+            this.sceneListData = _data;
+            this.getSortList();
+          } else {
+            this.Api.handleError(data.msg);
+          }
+        })
+        .catch(error => {
+          this.Api.handleError(error)
+        })
+      },
       getSortList () {
         let options = {
           action: 'find'
@@ -95,7 +113,20 @@
         .then(data => {
           if (data.err === 0) {
             let _data = data.data;
-            this.sortListData = _data;
+            this.sortListData = _data.map((item) => {
+              // let _item = item;
+              // _item._sceneName = [];
+              item._sceneName = item.scene.substr(1, item.scene.length - 2).split(',');
+              item._sceneName = item._sceneName.map((i) => {
+                let _sceneNameArr = this.sceneListData.filter((s) => {
+                  return s.id === i
+                }).map((n) => {
+                  return n.name
+                });
+                return _sceneNameArr;
+              }).join(', ');
+              return item;
+            });
           } else {
             this.Api.handleError(data.msg);
           }
@@ -111,11 +142,12 @@
         this.centerDialogVisible = true;
       },
       editOprate (item) {
+        let _scene = item.scene.substr(1, item.scene.length - 2).split(',');
         this.tcObj = Object.assign({}, {
           tit: '编辑所属分类',
           id: item.id,
           sortName: item.name,
-          scene: item.scene,
+          scene: _scene,
           weight: item.weight
         });
         this.$nextTick(() => {
@@ -128,10 +160,11 @@
           this.$message.error('请填入分类名称');
           return;
         }
+        let _scene = this.tcObj.scene.join(',');
         let options = {
           action: 'add',
           name: this.tcObj.sortName,
-          scene: this.tcObj.scene,
+          scene: ',' + _scene + ',',
           weight: this.tcObj.weight
         };
         // 编辑状态

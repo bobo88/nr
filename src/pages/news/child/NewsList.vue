@@ -13,11 +13,22 @@
         </template>
       </el-table-column>
       <el-table-column prop="title" label="新闻标题" align="center"></el-table-column>
+      <el-table-column label="新闻类别" align="center">
+        <template slot-scope="scope">
+          <span v-if="scope.row.type === '1'">新闻资讯</span>
+          <span v-if="scope.row.type === '2'">企业动态</span>
+          <span v-if="scope.row.type === '3'">轮播图片</span>
+          <span v-if="scope.row.type === '4'">好消息列表</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="descinfo" label="新闻简讯简介" align="center"></el-table-column>
       <el-table-column prop="content" label="内容详情" align="center"></el-table-column>
+      <el-table-column prop="source" label="来源" align="center"></el-table-column>
       <el-table-column prop="url" label="外部链接地址" align="center"></el-table-column>
+      <el-table-column prop="num" label="阅读量" align="center"></el-table-column>
       <el-table-column prop="newsdata" label="资讯时间" align="center"></el-table-column>
       <el-table-column prop="create_time" label="创建时间" align="center"></el-table-column>
+      <el-table-column prop="weight" label="权重值" align="center"></el-table-column>
 
       <el-table-column label="新闻状态" align="center">
         <template slot-scope="scope">
@@ -45,6 +56,15 @@
           <el-input size="small" class="w200" v-model="tcObj.title" placeholder="请输入资讯标题"></el-input>
         </div>
         <div class="mb10">
+          <span class="inline-block w100">新闻类别：</span>
+          <el-select size="small" class="w200" v-model="tcObj.type" placeholder="请选择">
+            <el-option key="0" label="新闻资讯" :value="1"></el-option>
+            <el-option key="1" label="企业动态" :value="2"></el-option>
+            <el-option key="2" label="轮播图片" :value="3"></el-option>
+            <el-option key="3" label="好消息列表" :value="4"></el-option>
+          </el-select>
+        </div>
+        <div class="mb10">
           <span class="inline-block w100">新闻图片：</span>
           <div class="inline-block w200 tl">
             <el-upload
@@ -67,12 +87,24 @@
           <el-input size="small" type="textarea" class="w200" v-model="tcObj.content" placeholder="请输入内容详情"></el-input>
         </div>
         <div class="mb10">
+          <span class="inline-block w100">来源：</span>
+          <el-input size="small" class="w200" v-model="tcObj.source" placeholder="请输入来源"></el-input>
+        </div>
+        <div class="mb10">
           <span class="inline-block w100">外部链接地址：</span>
           <el-input size="small" class="w200" v-model="tcObj.url" placeholder="请输入外部链接地址"></el-input>
         </div>
         <div class="mb10">
+          <span class="inline-block w100">阅读量：</span>
+          <el-input size="small" class="w200" v-model="tcObj.num" placeholder="请输入阅读量"></el-input>
+        </div>
+        <div class="mb10">
           <span class="inline-block w100">资讯时间：</span>
           <el-input size="small" class="w200" v-model="tcObj.newsdata" placeholder="请输入资讯时间"></el-input>
+        </div>
+        <div class="mb10">
+          <span class="inline-block w100">权重值：</span>
+          <el-input size="small" class="w200" v-model="tcObj.weight" placeholder="请输入权重值"></el-input>
         </div>
         <div class="mb10">
           <span class="inline-block w100">状态：</span>
@@ -148,7 +180,11 @@
           content: '',
           url: '',
           newsdata: '',
-          status: ''
+          status: '',
+          type: 1,
+          source: '',
+          num: 0,
+          weight: 0
         });
         this.centerDialogVisible = true;
       },
@@ -168,7 +204,11 @@
           content: this.tcObj.content,
           url: this.tcObj.url,
           newsdata: this.tcObj.newsdata,
-          status: this.tcObj.status
+          status: this.tcObj.status,
+          type: parseInt(this.tcObj.type),
+          source: this.tcObj.source,
+          num: this.tcObj.num,
+          weight: this.tcObj.weight
         };
         // 编辑状态
         if (this.tcObj.id) {
@@ -210,7 +250,11 @@
           content: item.content,
           url: item.url,
           newsdata: item.newsdata,
-          status: item.status
+          status: item.status,
+          type: parseInt(item.type),
+          source: item.source,
+          num: item.num,
+          weight: item.weight
         });
         this.$nextTick(() => {
           this.centerDialogVisible = true;

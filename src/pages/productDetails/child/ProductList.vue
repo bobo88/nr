@@ -58,13 +58,15 @@
 
       <el-table-column label="SEO描述" align="center">
         <template slot-scope="scope">
-          {{ scope.row.seoname }}
+          <template slot-scope="scope">
+          <div class="w100 ellipsis lh34">{{ scope.row.seoname }}</div>
+        </template>
         </template>
       </el-table-column>
 
-      <el-table-column label="产品描述" align="center">
+      <el-table-column label="产品描述" align="center" width="120">
         <template slot-scope="scope">
-          {{ scope.row.descinfo }}
+          <div class="w100 ellipsis lh34">{{ scope.row.descinfo }}</div>
         </template>
       </el-table-column>
       <el-table-column label="关键词" align="center">

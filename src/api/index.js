@@ -92,6 +92,9 @@ export default {
   // 底部名称
   footer (options) {
     return ajax.post('footer.php', options)
+  },
+  // 使用场景
+  scene (options) {
+    return ajax.post('scene.php', options)
   }
-
 }
