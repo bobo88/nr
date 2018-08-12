@@ -96,5 +96,8 @@ export default {
   // 使用场景
   scene (options) {
     return ajax.post('scene.php', options)
+  },
+  keyword (options) {
+    return ajax.post('keyword.php', options)
   }
 }

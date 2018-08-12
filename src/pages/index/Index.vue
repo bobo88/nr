@@ -34,6 +34,9 @@
       <el-tab-pane label="合作客户" name="five">
         <customers-config></customers-config>
       </el-tab-pane>
+      <el-tab-pane label="配置首页SEO" name="six">
+        <index-seo></index-seo>
+      </el-tab-pane>
       <!-- <el-tab-pane label="新闻资讯" name="six">
         <news-config></news-config>
       </el-tab-pane> -->
@@ -57,6 +60,8 @@ import HotSale from '@/pages/index/child/HotSale.vue'
 import CustomersConfig from '@/pages/index/child/CustomersConfig.vue'
 // 首页 - 新闻资讯
 import NewsConfig from '@/pages/index/child/NewsConfig.vue'
+// 首页 - 配置首页seo
+import IndexSeo from '@/pages/index/child/IndexSeo.vue'
 // 首页 - 页面底部
 import FootConfig from '@/pages/index/child/FootConfig.vue'
 export default {
@@ -68,6 +73,7 @@ export default {
     HotSale,
     CustomersConfig,
     NewsConfig,
+    IndexSeo,
     FootConfig
   },
   data () {
